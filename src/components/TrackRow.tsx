@@ -1,11 +1,11 @@
-import { Track } from "@/data/demoMusic";
+import { Track } from "@/context/PlayerContext";
 import { usePlayer } from "@/context/PlayerContext";
 import { Play, Pause } from "lucide-react";
 import { motion } from "framer-motion";
 
 const TrackRow = ({ track, index }: { track: Track; index: number }) => {
   const { setTrack, currentTrack, isPlaying, togglePlay } = usePlayer();
-  const isActive = currentTrack.id === track.id;
+  const isActive = currentTrack?.id === track.id;
 
   const handleClick = () => {
     if (isActive) togglePlay();
@@ -18,9 +18,8 @@ const TrackRow = ({ track, index }: { track: Track; index: number }) => {
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.04 }}
       onClick={handleClick}
-      className={`group flex cursor-pointer items-center gap-4 rounded-lg px-3 py-2.5 transition-colors hover:bg-secondary/60 ${
-        isActive ? "bg-secondary/40" : ""
-      }`}
+      className={`group flex cursor-pointer items-center gap-4 rounded-lg px-3 py-2.5 transition-colors hover:bg-secondary/60 ${isActive ? "bg-secondary/40" : ""
+        }`}
     >
       <span className="w-6 text-center text-sm text-muted-foreground group-hover:hidden">
         {index + 1}

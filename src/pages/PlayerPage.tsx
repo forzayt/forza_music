@@ -8,6 +8,21 @@ const PlayerPage = () => {
   const { currentTrack, isPlaying, togglePlay, progress, setProgress } = usePlayer();
   const navigate = useNavigate();
 
+  // If no track selected, send user back to dashboard
+  if (!currentTrack) {
+    return (
+      <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center gap-4 bg-background">
+        <p className="text-muted-foreground">No track is currently playing.</p>
+        <button
+          onClick={() => navigate("/")}
+          className="rounded-full bg-[#1DB954] px-6 py-2 text-sm font-bold text-black"
+        >
+          Go to Dashboard
+        </button>
+      </div>
+    );
+  }
+
   return (
     <AnimatePresence>
       <motion.div

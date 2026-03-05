@@ -1,8 +1,19 @@
 import { createContext, useContext, useState, ReactNode } from "react";
-import { Track, tracks } from "@/data/demoMusic";
+
+// A minimal track shape that works with both demo + Spotify data
+export interface Track {
+  id: string;
+  title: string;
+  artist: string;
+  album: string;
+  cover: string;
+  duration: string;
+  previewUrl?: string | null;
+  spotifyUri?: string;
+}
 
 interface PlayerContextType {
-  currentTrack: Track;
+  currentTrack: Track | null;
   isPlaying: boolean;
   progress: number;
   togglePlay: () => void;
@@ -19,9 +30,9 @@ export const usePlayer = () => {
 };
 
 export const PlayerProvider = ({ children }: { children: ReactNode }) => {
-  const [currentTrack, setCurrentTrack] = useState<Track>(tracks[0]);
+  const [currentTrack, setCurrentTrack] = useState<Track | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(35);
+  const [progress, setProgress] = useState(0);
 
   return (
     <PlayerContext.Provider

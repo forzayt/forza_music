@@ -1,11 +1,11 @@
-import { Track } from "@/data/demoMusic";
+import { Track } from "@/context/PlayerContext";
 import { usePlayer } from "@/context/PlayerContext";
 import { Play } from "lucide-react";
 import { motion } from "framer-motion";
 
 const MusicCard = ({ track, index = 0 }: { track: Track; index?: number }) => {
   const { setTrack, currentTrack, isPlaying } = usePlayer();
-  const isActive = currentTrack.id === track.id;
+  const isActive = currentTrack?.id === track.id;
 
   return (
     <motion.div
