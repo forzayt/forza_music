@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 6% 7%;
+    --foreground: 0 0% 95%;
+
+    --card: 240 6% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 240 6% 10%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 145 80% 42%;
+    --primary-foreground: 240 6% 7%;
+
+    --secondary: 240 5% 16%;
+    --secondary-foreground: 0 0% 85%;
+
+    --muted: 240 4% 14%;
+    --muted-foreground: 240 5% 55%;
+
+    --accent: 280 70% 55%;
+    --accent-foreground: 0 0% 95%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 95%;
+
+    --border: 240 4% 18%;
+    --input: 240 4% 18%;
+    --ring: 145 80% 42%;
+
+    --radius: 0.75rem;
+
+    --glass: 240 6% 12%;
+    --glass-border: 240 4% 22%;
+    --surface: 240 5% 13%;
+
+    --sidebar-background: 240 6% 8%;
+    --sidebar-foreground: 0 0% 85%;
+    --sidebar-primary: 145 80% 42%;
+    --sidebar-primary-foreground: 240 6% 7%;
+    --sidebar-accent: 240 5% 16%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 240 4% 18%;
+    --sidebar-ring: 145 80% 42%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: hsla(var(--glass), 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsla(var(--glass-border), 0.3);
+  }
+
+  .glass-strong {
+    background: hsla(var(--glass), 0.85);
+    backdrop-filter: blur(40px);
+    border: 1px solid hsla(var(--glass-border), 0.4);
+  }
+
+  .glow-primary {
+    box-shadow: 0 0 30px hsla(var(--primary), 0.3), 0 0 60px hsla(var(--primary), 0.1);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 30px hsla(var(--accent), 0.3), 0 0 60px hsla(var(--accent), 0.1);
+  }
+
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  }
+
+  .gradient-surface {
+    background: linear-gradient(180deg, hsl(var(--surface)), hsl(var(--background)));
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@keyframes ambient-rotate {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes vinyl-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-ambient-rotate {
+  animation: ambient-rotate 20s linear infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-vinyl-spin {
+  animation: vinyl-spin 3s linear infinite;
+}
