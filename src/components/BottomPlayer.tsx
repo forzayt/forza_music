@@ -4,7 +4,7 @@ import {
   Volume2, VolumeX, Radio, Loader2, AlertCircle
 } from "lucide-react";
 import { usePlayerStore } from "@/store/playerStore";
-import { getAudioStreamForTrack } from "@/lib/youtube";
+import { getStreamUrl } from "@/lib/audius";
 
 export default function BottomPlayer() {
   const {
@@ -27,7 +27,7 @@ export default function BottomPlayer() {
     setError(null);
     setStreamUrl(null);
 
-    getAudioStreamForTrack(currentTrack)
+    getStreamUrl(currentTrack.id)
       .then((url) => {
         if (!cancelled) setStreamUrl(url);
       })

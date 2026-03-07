@@ -1,15 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { searchSongs, getRecommendations, SpotifyTrack } from "@/lib/spotify";
+import { searchSongs, getRecommendations, Track } from "@/lib/audius";
 import { useSearchStore } from "@/store/searchStore";
 import { usePlayerStore } from "@/store/playerStore";
 import TrackCard from "@/components/TrackCard";
 import { Loader2, Radio, TrendingUp, AlertCircle, Flame } from "lucide-react";
-
-const FEATURED_SEEDS = [
-    "4cOdK2wGLETKBW3PvgPWqT", // Blinding Lights – The Weeknd
-    "1BxfuPKGuaTgP7aM0Chatn", // HUMBLE. – Kendrick Lamar
-    "3n3Ppam7vgaVa1iaRUIOKE", // Shape of You – Ed Sheeran
-];
 
 export default function Index() {
     const { query } = useSearchStore();
@@ -21,11 +15,9 @@ export default function Index() {
         enabled: query.length > 0,
     });
 
-    const seedId = currentTrack?.id ?? FEATURED_SEEDS[Math.floor(Math.random() * FEATURED_SEEDS.length)];
-
     const { data: recommendations, isLoading: recLoading } = useQuery({
-        queryKey: ["recommendations", seedId],
-        queryFn: () => getRecommendations(seedId),
+        queryKey: ["recommendations"],
+        queryFn: () => getRecommendations(),
         staleTime: 1000 * 60 * 5,
     });
 
@@ -42,19 +34,19 @@ export default function Index() {
                     {searchLoading && (
                         <div className="flex items-center gap-2 text-gray-400 py-6">
                             <Loader2 size={18} className="animate-spin" />
-                            Searching Spotify…
+                            Searching Audius…
                         </div>
                     )}
 
                     {searchError && (
                         <div className="flex items-center gap-2 text-red-400 py-4">
                             <AlertCircle size={16} />
-                            Failed to search. Check your Spotify credentials.
+                            Failed to search. Try again.
                         </div>
                     )}
 
                     <div className="track-list">
-                        {searchResults?.map((track: SpotifyTrack, i: number) => (
+                        {searchResults?.map((track: Track, i: number) => (
                             <TrackCard key={track.id} track={track} rank={i + 1} />
                         ))}
                     </div>
@@ -85,7 +77,7 @@ export default function Index() {
                 )}
 
                 <div className="track-list">
-                    {recommendations?.map((track: SpotifyTrack, i: number) => (
+                    {recommendations?.map((track: Track, i: number) => (
                         <TrackCard key={track.id} track={track} rank={i + 1} />
                     ))}
                 </div>

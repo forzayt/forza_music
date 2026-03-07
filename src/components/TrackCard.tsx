@@ -1,9 +1,9 @@
-import { SpotifyTrack } from "@/lib/spotify";
+import { Track } from "@/lib/audius";
 import { usePlayerStore } from "@/store/playerStore";
 import { Play, Plus, Clock } from "lucide-react";
 
 interface TrackCardProps {
-    track: SpotifyTrack;
+    track: Track;
     rank?: number;
 }
 

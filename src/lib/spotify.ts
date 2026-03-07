@@ -76,8 +76,22 @@ export async function searchSongs(query: string): Promise<SpotifyTrack[]> {
 }
 
 export async function getRecommendations(seedTrackId: string): Promise<SpotifyTrack[]> {
-    const data = await spotifyFetch(`/recommendations?seed_tracks=${seedTrackId}&limit=20&market=US`);
-    return data.tracks;
+    const token = await getAccessToken();
+    const url = `${SPOTIFY_API}/recommendations?seed_tracks=${seedTrackId}&limit=20&market=US`;
+    const res = await fetch(url, {
+        headers: { Authorization: `Bearer ${token}` },
+    });
+    if (res.ok) {
+        const data = await res.json();
+        return data.tracks;
+    }
+    if (res.status === 404) {
+        // Recommendations API unavailable (deprecated for new apps) – fall back to chart playlist
+        const chartKeys = Object.keys(CHART_PLAYLISTS) as ChartKey[];
+        const fallbackKey = chartKeys[Math.floor(Math.random() * chartKeys.length)];
+        return getPlaylistTracks(CHART_PLAYLISTS[fallbackKey].id);
+    }
+    throw new Error(`Spotify API error: ${res.statusText}`);
 }
 
 // Well‑known Spotify chart / editorial playlists

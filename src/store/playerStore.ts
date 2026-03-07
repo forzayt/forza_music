@@ -1,14 +1,14 @@
 import { create } from 'zustand';
-import { SpotifyTrack, getRecommendations } from '../lib/spotify';
+import { Track, getRecommendations } from '../lib/audius';
 
 interface PlayerState {
-    currentTrack: SpotifyTrack | null;
-    queue: SpotifyTrack[];
-    history: SpotifyTrack[];
+    currentTrack: Track | null;
+    queue: Track[];
+    history: Track[];
     isPlaying: boolean;
     volume: number;
-    playTrack: (track: SpotifyTrack) => void;
-    addToQueue: (track: SpotifyTrack) => void;
+    playTrack: (track: Track) => void;
+    addToQueue: (track: Track) => void;
     playNext: () => void;
     playPrev: () => void;
     setIsPlaying: (playing: boolean) => void;
@@ -22,7 +22,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
     isPlaying: false,
     volume: 1,
 
-    playTrack: async (track: SpotifyTrack) => {
+    playTrack: async (track: Track) => {
         set((state) => ({
             history: state.currentTrack ? [...state.history, state.currentTrack] : state.history,
             currentTrack: track,
@@ -45,7 +45,7 @@ export const usePlayerStore = create<PlayerState>((set, get) => ({
         }
     },
 
-    addToQueue: (track: SpotifyTrack) => {
+    addToQueue: (track: Track) => {
         set((state) => ({ queue: [...state.queue, track] }));
     },
 
