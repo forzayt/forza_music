@@ -76,7 +76,7 @@ export async function searchSongs(query: string): Promise<SpotifyTrack[]> {
 }
 
 export async function getRecommendations(seedTrackId: string): Promise<SpotifyTrack[]> {
-    const data = await spotifyFetch(`/recommendations?seed_tracks=${seedTrackId}&limit=20`);
+    const data = await spotifyFetch(`/recommendations?seed_tracks=${seedTrackId}&limit=20&market=US`);
     return data.tracks;
 }
 
