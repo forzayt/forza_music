@@ -1,4 +1,4 @@
-import { Track } from "@/lib/audius";
+import { Track } from "@/lib/piped";
 import { usePlayerStore } from "@/store/playerStore";
 import { Play, Plus, Clock } from "lucide-react";
 

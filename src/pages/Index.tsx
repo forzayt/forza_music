@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { searchSongs, getRecommendations, Track } from "@/lib/audius";
+import { searchSongs, getRecommendations, Track } from "@/lib/piped";
 import { useSearchStore } from "@/store/searchStore";
 import { usePlayerStore } from "@/store/playerStore";
 import TrackCard from "@/components/TrackCard";
@@ -34,7 +34,7 @@ export default function Index() {
                     {searchLoading && (
                         <div className="flex items-center gap-2 text-gray-400 py-6">
                             <Loader2 size={18} className="animate-spin" />
-                            Searching Audius…
+                            Searching…
                         </div>
                     )}
 

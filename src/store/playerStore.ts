@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Track, getRecommendations } from '../lib/audius';
+import { Track, getRecommendations } from '../lib/piped';
 
 interface PlayerState {
     currentTrack: Track | null;

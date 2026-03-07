@@ -11,6 +11,13 @@ export default defineConfig(({ mode }) => ({
     hmr: {
       overlay: false,
     },
+    proxy: {
+      "/api/piped": {
+        target: "https://pipedapi.leptons.xyz",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/piped/, ""),
+      },
+    },
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {

@@ -4,7 +4,7 @@ import {
   Volume2, VolumeX, Radio, Loader2, AlertCircle
 } from "lucide-react";
 import { usePlayerStore } from "@/store/playerStore";
-import { getStreamUrl } from "@/lib/audius";
+import { getStreamUrl } from "@/lib/piped";
 
 export default function BottomPlayer() {
   const {
